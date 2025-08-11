@@ -4,10 +4,10 @@ on: push
 
 jobs: 
     Firstjob:
-        runs-on: ubuntu:latest
+        runs-on: ubuntu-latest
         steps: 
         - name: checkout Repo
-          uses: action/checkout@v4
+          uses: actions/checkout@v4
 
         - name: list and read file
           run: |  
