@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [11, 17] 
 
     steps:
       - name: Checkout repository
