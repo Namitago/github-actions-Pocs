@@ -3,7 +3,7 @@ name: Reusable Build
 on:
   workflow_call:
     inputs:
-      node-version:
+      java-version:
         required: true
         type: string
 
