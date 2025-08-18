@@ -1,1 +1,10 @@
+name: Main Workflow
+
+on: [push]
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/build.yml
+    with:
+      java-version: 17
 
