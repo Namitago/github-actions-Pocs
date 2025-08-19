@@ -1,4 +1,4 @@
-name: Java CI Pipeline
+name: download syntax
 
 on:
   workflow_dispatch:
