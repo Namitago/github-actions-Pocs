@@ -1,0 +1,40 @@
+name: Need and upload syntax
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # Step 1: Build
+      - name: Build JAR
+        run: mvn -B clean package -DskipTests
+
+      # Step 2: Upload build artifact
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/*.jar
+
+      # Step 3: Run Tests
+      - name: Run Tests
+        run: mvn test
+
+      # Step 4: Deploy
+      - name: Deploy
+        run: |
+          echo "Deploying..."
+          ls -lh target/*.jar
+          # Example deploy command here
