@@ -1,12 +1,14 @@
 name: "sonar_cloud_scan_github_actions"
 
 on:
-  pull:
+  workflow_dispatch:
+    branches:
+      - selfhosted 
 
 jobs:
   DemoSonarCloudScan:
     # 👇 Use your self-hosted runner label here
-    runs-on: [self-hosted, linux]  
+    runs-on: [self-hosted, Windows]  
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,7 +35,7 @@ jobs:
 
       - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_SELF }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar \
           -Dsonar.projectKey=Namitago_github-actions-Pocs
 
