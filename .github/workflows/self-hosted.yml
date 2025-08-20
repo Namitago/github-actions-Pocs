@@ -2,8 +2,11 @@ name: "self-hosted"
 
 on:
   workflow_dispatch:
-    branches:
-      - selfhosted 
+    inputs:
+      branch:
+        description: "Branch to run on"
+        required: true
+        default: "selfhosted" 
 
 jobs:
   DemoSonarCloudScan:
