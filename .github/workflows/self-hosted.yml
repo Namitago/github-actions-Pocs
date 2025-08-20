@@ -1,9 +1,13 @@
-name: "sonar_cloud_scan_github_actions"
+name: "self-hoted-branch"
 
 on:
   workflow_dispatch:
-    branches:
-      - selfhosted 
+    inputs:
+      branch:
+        description: "Branch to run on"
+        required: true
+        default: "selfhosted"
+
 
 jobs:
   DemoSonarCloudScan:
