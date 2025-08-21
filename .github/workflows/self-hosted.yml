@@ -1,4 +1,4 @@
-name: "self-hoted-branch"
+name: "self-hosted-branch"
 
 on:
   workflow_dispatch:
