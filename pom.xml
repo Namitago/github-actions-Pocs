@@ -17,6 +17,8 @@
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.projectKey>Namitago_github-actions-Pocs</sonar.projectKey>
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
   </properties>
   <build>
     <pluginManagement>
