@@ -42,7 +42,7 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_SELF }}
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar ^
+          mvn -B verify sonar:sonar ^
             "-Dsonar.projectKey=Namitago_github-actions-Pocs" ^
             "-Dsonar.projectName=Namitago_github-actions-Pocs" ^
             "-Dsonar.host.url=%SONAR_HOST_URL%" ^
