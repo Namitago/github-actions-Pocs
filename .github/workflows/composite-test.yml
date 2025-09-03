@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Composite Action for Java
-        uses: ./.github/actions/java-build-test
+        uses: ./.github/actions/composite-action
         with:
           java-version: "21"
           run-tests: "true"
