@@ -1,0 +1,12 @@
+name: Java CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Composite Action for Java
+        uses: ./.github/actions/java-build-test
+        with:
+          java-version: "21"
+          run-tests: "true"

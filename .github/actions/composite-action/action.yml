@@ -1,0 +1,33 @@
+name: "Java Build & Test"
+description: "Reusable composite action to build and test Java projects"
+inputs:
+  java-version:
+    description: "Java version to use"
+    required: true
+    default: "17"
+  run-tests:
+    description: "Run unit tests (true/false)"
+    required: false
+    default: "true"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: "temurin"
+        java-version: ${{ inputs.java-version }}
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn -B clean package
+      shell: bash
+
+    - name: Run Tests
+      if: ${{ inputs.run-tests == 'true' }}
+      run: mvn test
+      shell: bash
