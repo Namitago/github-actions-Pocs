@@ -1,0 +1,65 @@
+name: Create and Monitor Check Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-run-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Create a check run using GitHub API
+      - name: Create Check Run
+        id: create_check_run
+        run: |
+          response=$(curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{
+                "name": "Test Run",
+                "head_sha": "${{ github.sha }}",
+                "status": "in_progress",
+                "started_at": "$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
+              }' \
+            https://api.github.com/repos/${{ github.repository }}/check-runs)
+          
+          # Extract the check_run ID from the response
+          check_run_id=$(echo $response | jq -r '.id')
+          echo "Created Check Run ID: $check_run_id"
+          
+          # Save check_run_id for later steps
+          echo "::set-output name=check_run_id::$check_run_id"
+
+      # Step 2: Run Tests (Simulate Tests Here)
+      - name: Run Tests
+        run: |
+          echo "Running tests..."
+          # Simulate a test run (Replace with actual tests)
+          sleep 5  # Simulate some task
+          echo "Tests completed."
+
+      # Step 3: Update Check Run Status to "completed" and "success"
+      - name: Update Check Run Status
+        run: |
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{
+                "status": "completed",
+                "conclusion": "success",
+                "completed_at": "$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
+              }' \
+            https://api.github.com/repos/${{ github.repository }}/check-runs/${{ steps.create_check_run.outputs.check_run_id }}
+
+      # Step 4: Send Webhook Notification
+      - name: Send Webhook Notification
+        run: |
+          curl -X POST https://https://hooks.slack.com/services/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.com \
+            -H "Content-Type: application/json" \
+            -d '{
+              "check_run_id": "${{ steps.create_check_run.outputs.check_run_id }}",
+              "status": "completed",
+              "conclusion": "success",
+              "message": "Test Run completed successfully",
+              "timestamp": "$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
+            }'
