@@ -13,7 +13,7 @@ jobs:
         id: create_check_run
         run: |
           response=$(curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUBACTION_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -d '{
                 "name": "Test Run",
@@ -42,7 +42,7 @@ jobs:
       - name: Update Check Run Status
         run: |
           curl -X PATCH \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUBACTION_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -d '{
                 "status": "completed",
