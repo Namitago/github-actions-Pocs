@@ -11,7 +11,7 @@ on:
 jobs:
   DemoSonarCloudScan:
     # 👇 Use your self-hosted runner label here
-    runs-on: [self-hosted, Windows]  
+    runs-on: [runner1,runner2]  
     steps:
       - uses: actions/checkout@v4
         with:
