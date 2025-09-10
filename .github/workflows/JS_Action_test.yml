@@ -11,6 +11,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run custom JS action
-        uses: ./github/actions/js
+        uses: ./.github/actions/js
         with:
           name: "Namita"
