@@ -1,6 +1,7 @@
 name: Env Workflow
 
-on: [push]
+on: 
+  workflow_dispatch:
 
 env: #Global_Level
   GLOBAL_ENV: "global"
