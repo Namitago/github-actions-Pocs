@@ -42,14 +42,6 @@ jobs:
           echo "Branch = $GITHUB_REF"
           echo "Commit SHA = $GITHUB_SHA"
 
-  matrix-job:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16, 18]
-    steps:
-      - name: Print matrix value
-        run: echo "Running tests on Node.js ${{ matrix.node }}"
 
 
       
