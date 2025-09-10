@@ -1,0 +1,11 @@
+name: "Hello JS Action"
+description: "A simple JavaScript action that prints a greeting"
+author: "Your Name"
+inputs:
+  name:
+    description: "Who to greet"
+    required: true
+    default: "World"
+runs:
+  using: "node20"
+  main: "index.js"
